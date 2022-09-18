@@ -30,6 +30,14 @@ class facbooklogin():
         #self.driver.find_element(by=By.CSS_SELECTOR, value="input#identify_email").send_keys("sample")
         self.driver.find_element(by=By.CSS_SELECTOR, value="input[placeholder = 'Email address or mobile number']").send_keys("sample")
 
-
+        self.driver.back();
+        #xpatj
+        time.sleep(2)
+        self.driver.find_element(by=By.XPATH,value="//input[@data-testid='royal_email']").send_keys("xpathvalue")
+        #self.driver.find_element(by=By.XPATH,value="//button[contains(@id,'u_0_')]").click()
+        #self.driver.find_element(by=By.XPATH,value="//button[contains(@class,'6lth')]").click()
+        #self.driver.find_element(by=By.XPATH,value="//button[starts-with(@id,'u_0')]").click()
+        #self.driver.find_element(by=By.XPATH,value="//button[starts-with(@id,'u_0') or contains(@class,'6lth')]").click()
+        self.driver.find_element(by=By.XPATH,value="//button[text()='Log in']").click()
 obj=facbooklogin()
 obj.login()
