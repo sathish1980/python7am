@@ -6,11 +6,16 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.firefox import GeckoDriverManager
+from webdriver_manager.microsoft import EdgeChromiumDriverManager
+
 
 class FBaccount():
     
     def createAccount(self, web=None):
-        self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=web)
+        #self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=web)
+        #self.driver = webdriver.Edge(service=Service(EdgeChromiumDriverManager().install()), options=web)
+        self.driver = webdriver.Firefox(service=Service(GeckoDriverManager().install()), options=web)
         self.driver.get("https://www.facebook.com/")
         #self.driver.implicitly_wait(60)
         self.driver.maximize_window()
