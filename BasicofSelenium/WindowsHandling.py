@@ -58,6 +58,7 @@ class windowsHandling():
                 print(self.driver.window_handles)
                 #self.driver.close()
                 self.driver.switch_to.window(currentwindowname)
+                break
             else:
                 self.driver.switch_to.window(currentwindowname)
 
