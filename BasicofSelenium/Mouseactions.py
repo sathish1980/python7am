@@ -40,6 +40,7 @@ class mouseactions():
         fbmouse = ActionChains(self.driver)
         fbmouse.move_to_element(self.driver.find_element(by=By.ID, value="email")).send_keys(
             "sathish").double_click().context_click().perform()
+        #key boad action is perfomring
         pyautogui.press("down")
         time.sleep(1)
         pyautogui.press("down")
