@@ -22,6 +22,9 @@ class vv():
         print(self.driver.current_window_handle)
         print(self.driver.window_handles)
         #validation
+        showbutton=self.driver.find_element(by=By.XPATH,value="(//*[text()='Show'])[1]")
+        showbutton.is_enabled()
+        #or
         print(self.driver.find_element(by=By.XPATH,value="(//*[text()='Show'])[1]").is_enabled())
         print(self.driver.find_element(by=By.XPATH, value="(//*[text()='Show'])[1]").is_displayed())
         print(self.driver.find_element(by=By.XPATH, value="(//*[text()='Show'])[1]").is_selected())
