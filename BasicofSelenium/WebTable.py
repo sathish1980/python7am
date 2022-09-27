@@ -21,15 +21,21 @@ class webtable():
         print(len(totalPages))
         for eachelement in range(1,len(totalPages)+1):
             self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            WebDriverWait(self.driver, 60).until(EC.element_to_be_clickable((By.XPATH, "//*[@class='ui-paginator-pages']//a["+str(eachelement)+"]")))
             self.driver.find_element(by=By.XPATH, value="//*[@class='ui-paginator-pages']//a["+str(eachelement)+"]").click()
 
             #eachelement.click()
             #self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-            time.sleep(2)
+            #WebDriverWait(self.driver, 60).until(EC.staleness_of((self.driver.find_element(By.XPATH, value="//div[@class='ui-datatable-scrollable-body']//table//tbody//tr"))))
+            WebDriverWait(self.driver, 60).until(EC.presence_of_element_located((By.XPATH,"//div[@class='ui-datatable-scrollable-body']//table//tbody//tr[1]//td[2]//span[3]")))
+
+            time.sleep(1)
             totalRows=self.driver.find_elements(by=By.XPATH,value="//div[@class='ui-datatable-scrollable-body']//table//tbody//tr")
             for eachvalue in range(1,len(totalRows)+1):
-               countryName= self.driver.find_element(by=By.XPATH,
-                                          value="//div[@class='ui-datatable-scrollable-body']//table//tbody//tr["+str(eachvalue)+"]//td[2]//span[3]").text
+               WebDriverWait(self.driver, 60).until(EC.presence_of_element_located(
+                    (By.XPATH, "//div[@class='ui-datatable-scrollable-body']//table//tbody//tr["+str(eachvalue)+"]//td[2]//span[3]")))
+
+               countryName= self.driver.find_element(by=By.XPATH,value="//div[@class='ui-datatable-scrollable-body']//table//tbody//tr["+str(eachvalue)+"]//td[2]//span[3]").text
 
                if (countryName==actualCountryName):
                    representative=self.driver.find_element(by=By.XPATH,
