@@ -39,8 +39,8 @@ class Frame:
         self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
         self.driver.get("https://leafground.com/frame.xhtml")
         self.driver.maximize_window()
+        #self.driver.find_element(by=By.XPATH,value="(//button[@id='Click' and text()='Click Me'])[1]").click()
         totalFrames = self.driver.find_elements(by=By.TAG_NAME, value="iframe")
-        # self.driver.find_element(by=By.XPATH,value="(//button[@id='Click' and text()='Click Me'])[1]").click()
         for eachframe in range(0, len(totalFrames)):
             self.driver.switch_to.frame(eachframe)
             totalinsdieFrames = self.driver.find_elements(by=By.TAG_NAME, value="iframe")

@@ -25,6 +25,10 @@ class uploadanddownload():
         filenameafterupload = self.driver.find_element(by=By.XPATH,
                                                        value="(//*[contains(@class,'input-file-upload')])[2]").text
         print(filenameafterupload)
+    def dowloadnormal(self):
+        self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+        self.driver.get("https://leafground.com/grid.xhtml")
+        self.driver.find_element(by=By.ID, value="form:j_idt93").click()
 
     def download(self):
         chromeoptions = webdriver.ChromeOptions()

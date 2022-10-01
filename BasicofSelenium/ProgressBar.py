@@ -16,6 +16,7 @@ class progressbar:
         self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
         self.driver.get("https://leafground.com/drag.xhtml")
         self.driver.maximize_window()
+        self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
         self.driver.execute_script("document.querySelector('.ui-state-default').style.left = '0%'")
         self.driver.find_element(by=By.ID, value="form:j_idt119").click()
         WebDriverWait(self.driver, 60).until(

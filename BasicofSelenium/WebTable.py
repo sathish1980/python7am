@@ -46,7 +46,49 @@ class webtable():
                    #print(Status)
                    print(countryName ,representative,Status)
 
+    def tableinfiorstpage(self):
+        self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+        self.driver.get("https://leafground.com/table.xhtml")
+        self.driver.maximize_window()
+        totalrows=self.driver.find_elements(by=By.XPATH,value="//*[@class='card']//div[@class='ui-datatable-scrollable-body']//table//tbody//tr")
+        count=0
+        for eachrow in totalrows:
+            count+=1
+            country=self.driver.find_element(by=By.XPATH,
+                                      value="//*[@class='card']//div[@class='ui-datatable-scrollable-body']//table//tbody//tr["+str(count)+"]//td[2]//span[3]").text
+
+            joindate = self.driver.find_element(by=By.XPATH,
+                                               value="//*[@class='card']//div[@class='ui-datatable-scrollable-body']//table//tbody//tr[" + str(
+                                                   count) + "]//td[4]").text
+            print(country,joindate)
+
+    def allpages(self):
+        self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+        self.driver.get("https://leafground.com/table.xhtml")
+        self.driver.maximize_window()
+        allpages=self.driver.find_elements(By.XPATH,value="//*[@class='ui-paginator-pages']//a")
+        for eachpage in range(1,len(allpages)+1):
+
+            self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            print("###############%%%%%%%%%%%%%%%%%%")
+            #time.sleep(2)
+            self.driver.find_element(By.XPATH,value="//*[@class='ui-paginator-pages']//a["+str(eachpage)+"]").click()
+            time.sleep(2)
+            totalrows = self.driver.find_elements(by=By.XPATH,
+                                                  value="//*[@class='card']//div[@class='ui-datatable-scrollable-body']//table//tbody//tr")
+            count = 0
+            for eachrow in totalrows:
+                count += 1
+                country = self.driver.find_element(by=By.XPATH,
+                                                   value="//*[@class='card']//div[@class='ui-datatable-scrollable-body']//table//tbody//tr[" + str(
+                                                       count) + "]//td[2]//span[3]").text
+
+                joindate = self.driver.find_element(by=By.XPATH,
+                                                    value="//*[@class='card']//div[@class='ui-datatable-scrollable-body']//table//tbody//tr[" + str(
+                                                        count) + "]//td[4]").text
+                print(country, joindate)
 
 
 obj=webtable()
-obj.tableimplementation("Germany")
+obj.allpages()
+#obj.tableimplementation("Germany")
