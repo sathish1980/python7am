@@ -1,9 +1,9 @@
 import pytest
 
-
+@pytest.mark.usefixtures("launch")
 class Test_secondsample:
 
-    @pytest.mark.Sanity
+    @pytest.mark.MustRun
     def test_thirdtestcase(self):
         print("This is third test case")
 
@@ -12,7 +12,7 @@ class Test_secondsample:
         print("This is fourth test case")
 
     @pytest.mark.Regression
-    @pytest.mark.Sanity
+    @pytest.mark.MustRun
     def test_fourthtestcases(self):
         print("This is latest test case")
 
