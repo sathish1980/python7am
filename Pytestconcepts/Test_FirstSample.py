@@ -1,6 +1,6 @@
 import pytest
 
-
+@pytest.mark.usefixtures("fixtureconcept")
 class Test_firstclass:
 
     @pytest.mark.Sanity
@@ -12,3 +12,5 @@ class Test_firstclass:
     @pytest.mark.run(order=1)
     def test_secondTestcase(self):
         print("This is second test case")
+
+

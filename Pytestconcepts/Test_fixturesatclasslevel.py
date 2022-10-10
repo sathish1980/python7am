@@ -1,7 +1,7 @@
 import pytest
 
 
-@pytest.mark.usefixtures("launch")
+#@pytest.mark.usefixtures("launch")
 class Test_fixturesatclasslevel:
 
     @pytest.mark.SIT

@@ -6,6 +6,15 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 
+from Pytestconcepts.Testdata import Testdata
+
+
+@pytest.fixture(scope="class")
+def fixtureconcept():
+    print("Before Testcase")
+    yield
+    print("After Test case")
+
 @pytest.fixture(scope="class")
 def launch():
     print("Beforetestcase")
@@ -27,6 +36,11 @@ def Username():
     return["kumar.sathish189@gmail.com","Admin@123"]
 
 @pytest.fixture(params=[{"username": "kumar.sathish189@gmail.com", "password": "Admin@123"},
-                       {"username": "kumar.sathish189@gmail.com", "password": "Admin@123"}])
+                       {"username": "kumar.sathish189@gmail.com", "password": "Admin@123"},
+                        {"username": "kumar.sathish189@gmail.com", "password": "Admin@123"}])
 def Usernamewithmultidata(request):
+    return request.param
+
+@pytest.fixture(params=Testdata.fbusernames)
+def Usernamewithmultidatafromotherfile(request):
     return request.param
