@@ -44,3 +44,7 @@ def Usernamewithmultidata(request):
 @pytest.fixture(params=Testdata.fbusernames)
 def Usernamewithmultidatafromotherfile(request):
     return request.param
+
+@pytest.fixture(params=Testdata.credential_excel_dic)
+def Usernamewithmultidatafromexcel(request):
+    return request.param

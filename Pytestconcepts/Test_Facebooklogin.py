@@ -75,7 +75,7 @@ class Test_facebooklogin:
         WebDriverWait(self.driver, 60).until(
             EC.presence_of_element_located((By.ID, "email")))
 
-    def test_FBLoginwithvalidDatawithmultiplefromother(self, Usernamewithmultidatafromotherfile):
+    def FBLoginwithvalidDatawithmultiplefromother(self, Usernamewithmultidatafromotherfile):
         self.driver.get("https://www.facebook.com/")
         # self.driver.find_element(by=By.ID, value="email").send_keys("kumar.sathish189@gmail.com")
         self.driver.find_element(by=By.ID, value="email").send_keys(Usernamewithmultidatafromotherfile["username"])
@@ -92,3 +92,25 @@ class Test_facebooklogin:
         self.driver.find_element(by=By.XPATH, value="(//span[text()='Log Out']//parent::div//parent::div)[1]").click()
         WebDriverWait(self.driver, 60).until(
             EC.presence_of_element_located((By.ID, "email")))
+
+    def test_FBLoginwithvalidDatawithDD(self, Usernamewithmultidatafromexcel):
+        self.driver.get("https://www.facebook.com/")
+        # self.driver.find_element(by=By.ID, value="email").send_keys("kumar.sathish189@gmail.com")
+        print(Usernamewithmultidatafromexcel)
+        print(len(Usernamewithmultidatafromexcel))
+        actualcount=len(Usernamewithmultidatafromexcel)/2
+        for eachvalue in range(1,int(actualcount)+1):
+            self.driver.find_element(by=By.ID, value="email").send_keys(Usernamewithmultidatafromexcel["username"+str(eachvalue)])
+            # self.driver.find_element(by=By.NAME, value="pass").send_keys("Test"])
+            self.driver.find_element(by=By.NAME, value="pass").send_keys(Usernamewithmultidatafromexcel["password"+str(eachvalue)])
+            self.driver.find_element(by=By.XPATH, value="//button[text()='Log in']").click()
+            # time.sleep(2)
+            WebDriverWait(self.driver, 60).until(
+                EC.element_to_be_clickable((By.XPATH, "(//*[@aria-label='Your profile'])[1]")))
+            self.driver.find_element(by=By.XPATH, value="(//*[@aria-label='Your profile'])[1]").click()
+            # time.sleep(2)
+            WebDriverWait(self.driver, 60).until(
+                EC.element_to_be_clickable((By.XPATH, "(//span[text()='Log Out']//parent::div//parent::div)[1]")))
+            self.driver.find_element(by=By.XPATH, value="(//span[text()='Log Out']//parent::div//parent::div)[1]").click()
+            WebDriverWait(self.driver, 60).until(
+                EC.presence_of_element_located((By.ID, "email")))

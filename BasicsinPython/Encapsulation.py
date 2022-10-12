@@ -20,9 +20,15 @@ class Encapsulation:
         print("the petrol capacity is : ",self._pertrolcapacity)
         print("the a value is : ", self.a)
 
+    def setmaxvale(self,speed):
+        self.__maxspeed = speed
+        print(self.__maxspeed)
+
+    def getmaxspeed(self,speed):
+        return self.setmaxvale(speed)
 
 
 
-redcar = Encapsulation()
+"""redcar = Encapsulation()
 redcar.drive()
-redcar.accesmodifier()
+redcar.accesmodifier()"""
