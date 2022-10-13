@@ -9,8 +9,13 @@ from selenium.webdriver.support.wait import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support import expected_conditions as EC
 
-@pytest.mark.usefixtures("launchBrowserandExit")
-class Test_facebooklogin:
+from Common.CommonFunctions import commonFunctions
+from pages.Facebooklogin_page import facebooklogin_page
+from pages.facebooklogout_page import facebooklogout_page
+
+
+
+class Test_facebooklogin(commonFunctions):
 
     def FBLoginwithvalidData(self,Username):
         self.driver.get("https://www.facebook.com/")
@@ -93,7 +98,7 @@ class Test_facebooklogin:
         WebDriverWait(self.driver, 60).until(
             EC.presence_of_element_located((By.ID, "email")))
 
-    def test_FBLoginwithvalidDatawithDD(self, Usernamewithmultidatafromexcel):
+    def FBLoginwithvalidDatawithDD(self, Usernamewithmultidatafromexcel):
         self.driver.get("https://www.facebook.com/")
         # self.driver.find_element(by=By.ID, value="email").send_keys("kumar.sathish189@gmail.com")
         print(Usernamewithmultidatafromexcel)
@@ -114,3 +119,21 @@ class Test_facebooklogin:
             self.driver.find_element(by=By.XPATH, value="(//span[text()='Log Out']//parent::div//parent::div)[1]").click()
             WebDriverWait(self.driver, 60).until(
                 EC.presence_of_element_located((By.ID, "email")))
+
+    def test_FBLoginwithvalidDatawithPOM(self, Usernamewithmultidatafromexcel):
+        self.driver.get("https://www.facebook.com/")
+        # self.driver.find_element(by=By.ID, value="email").send_keys("kumar.sathish189@gmail.com")
+        print(Usernamewithmultidatafromexcel)
+        print(len(Usernamewithmultidatafromexcel))
+        actualcount = len(Usernamewithmultidatafromexcel) / 2
+        for eachvalue in range(1, int(actualcount) + 1):
+            facebooklogin=facebooklogin_page(self.driver)
+            facebooklogin.EnterUsername(Usernamewithmultidatafromexcel["username" + str(eachvalue)])
+            facebooklogin.EnterPassword(Usernamewithmultidatafromexcel["password" + str(eachvalue)])
+            facebooklogin.Clickloginbutton()
+            facebooklogout = facebooklogout_page(self.driver)
+            facebooklogout.ClickOnProfile()
+            # time.sleep(2)
+            facebooklogout.ClickOnLogoutButton()
+
+
